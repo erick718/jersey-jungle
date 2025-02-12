@@ -14,7 +14,7 @@ A digital marketplace where users can buy and sell sports jerseys. The platform 
 ## Usage
 
 1. Start the project:
-   `npm start`
+   `nodemon app`
 2. Open your browser and go to:
    `http://localhost:3000`
 
