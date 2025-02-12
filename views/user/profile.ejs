@@ -1,0 +1,63 @@
+<%- include('../partials/header.ejs')%>
+    <main>
+        <h2 style="text-align: center;">Welcome, <%=user.firstName + ' ' + user.lastName%></h2>
+        <div class="profile">
+            <h3>My Listings</h3>
+            <%if(items.length) {%>
+                <div class="items-wrapper">
+                    <div class="item-container header">
+                        <div style="width: 18%;">
+                            <p>Item</p>
+                        </div>
+                        <p>Status</p>
+                        <p style="width: 17%;">Action</p>
+                    </div>
+                    <%items.forEach(item => {%>
+                        <div class="item-container">
+                            <div style="width: 30%;">
+                                <a href="/items/<%= item.id%>"><p><%= item.title%></p></a>
+                            </div>
+                            <%if(item.active) {%>
+                                <p style="width: 6%;">active</p>
+                            <%} else {%>
+                                <p style="width: 6%;">sold</p>
+                            <%}%>
+                            <form class="item-actions" >
+                                <button type="submit" class="edit" formmethod="GET" formaction="/items/<%= item._id%>/edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                                <button type="submit" class="delete" formmethod="POST" formaction="/items/<%= item._id%>/?_method=DELETE"><i class="fa-solid fa-trash"></i></button>
+                                <button type="submit" formmethod="GET" formaction="/items/<%= item._id%>/offers" <%if(item.totalOffers === 0) {%> class="disabled" disabled <%}%> >View Offers</button>
+                            </form>
+                        </div>
+                    <%});%>
+                </div>
+            <%} else {%>
+                <p>You have not listed any items</p>
+            <%}%>
+        </div>
+        <div class="profile">
+            <h3>My Offers</h3>
+            <%if(offers.length) {%>
+                <div class="items-wrapper">
+                    <div class="item-container header">
+                        <div style="width: 18%;">
+                            <p>Item</p>
+                        </div>
+                        <p>Status</p>
+                        <p style="width: 16%;">Amount</p>
+                    </div>
+                    <%offers.forEach(offer => {%>
+                        <div class="item-container">
+                            <div style="width: 30%;">
+                                <a href="/items/<%= offer.item._id%>"><p><%= offer.item.title%></p></a>
+                            </div>
+                            <p style="width: 22%;"><%= offer.status%></p>
+                            <p style="width: 13%;">$<%= offer.amount%></p>
+                        </div>
+                    <%});%>
+                </div>
+            <%} else {%>
+                <p>You have not made any offers</p>
+            <%}%>
+        </div>
+    </main>
+<%- include('../partials/footer.ejs')%>

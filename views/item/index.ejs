@@ -1,0 +1,17 @@
+<%- include('../partials/header.ejs')%>
+    <main class="jersey-container">
+        <%if(items.length) {%>
+            <%items.forEach(item => {%>
+                <div class="jerseys">
+                    <a href="/items/<%= item._id%>"><img src="<%= item.image%>" alt="<%= item.title%>"></a>
+                    <p class="jersey-name"><%= item.title%></p>
+                    <p><%= item.condition%></p>
+                    <p>$<%= item.price%></p>
+                    <p class="offer"><%= item.totalOffers === 1 ? '1 Offer' : item.totalOffers + ' Offers' %></p>
+                </div>
+            <%});
+        } else {%>
+            <p>There are no items to display.</p>
+        <%}%>
+    </main>
+<%- include('../partials/footer.ejs')%>

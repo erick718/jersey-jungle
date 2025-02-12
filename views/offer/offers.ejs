@@ -1,0 +1,39 @@
+<%- include('../partials/header.ejs')%>
+    <main>
+        <div class="profile">
+            <h3>Offers received for: <%= item.title%></h3>
+            <%if(offers.length) {%>
+                <div class="items-wrapper">
+                    <div class="item-container header">
+                        <div style="width: 18%;">
+                            <p>Item</p>
+                        </div>
+                        <p>Amount</p>
+                        <%if(item.active) {%>
+                            <p style="width: 16%;">Action</p>
+                        <%} else {%>
+                            <p style="width: 16%;">Status</p>
+                        <%}%>
+                    </div>
+                    <%offers.forEach(offer => {%>
+                        <div class="item-container">
+                            <div style="width: 30%;">
+                                <p><%= offer.buyer.firstName + ' ' + offer.buyer.lastName%></p>
+                            </div>
+                            <p style="width: 16%;">$<%= offer.amount%></p>
+                            <%if(item.active) {%>
+                                <form class="item-actions" style="width: 17%;">
+                                    <button formmethod="POST" formaction="/items/<%= item._id%>/offers/<%= offer._id%>?_method=PUT" >Accept</button>
+                                </form>
+                            <%} else {%>
+                                <p style="width: 16%;"><%= offer.status%></p>
+                            <%}%>
+                        </div>
+                    <%});%>
+                </div>
+            <%} else {%>
+                <p>You have not listed any items</p>
+            <%}%>
+        </div>
+    </main>
+<%- include('../partials/footer.ejs')%>

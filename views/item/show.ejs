@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs')%>
+    <main>
+        <div class="jersey-item">
+            <img src="<%= item.image%>" alt="<%= item.title%>">
+            <div class="jersey-description">
+                <h2><%= item.title%></h2>
+                <p><strong>Condition: <%= item.condition%></strong></p>
+                <p><strong>Price: $<%= item.price%> | <%= item.totalOffers === 1 ? '1 Offer' : item.totalOffers + ' Offers' %></strong></p>
+                <p><strong>Seller: <%= item.seller.firstName + ' ' + item.seller.lastName %></strong></p>
+                <p><%= item.details%></p>
+                <%if(item.active) {%>
+                    <form action = '/items/<%= item._id%>/offers' method = 'POST'>
+                        <input type="number" name="amount">
+                        <button type="submit">Make an Offer</button>
+                    </form>
+                <%}
+                if(item.totalOffers && item.active){%>
+                    <p style="color: red;">Current highest offer: $<%= item.highestOffer%></p>
+                <%}
+                if(!item.active) {%>
+                    <p style="color: red;">Unfortunately, this jersey is no longer available</p>
+                <%}%>
+            </div>
+        </div>
+    </main>
+<%- include('../partials/footer.ejs')%>
