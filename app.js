@@ -13,9 +13,9 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 
 //configure app
-let port = 3000;
+let port = 2000;
 let host = 'localhost';
-let url = 'mongodb://localhost:27017/project4'
+let url = 'mongodb://localhost:27017'
 app.set('view engine', 'ejs');
 const mongUri = 'mongodb+srv://admin:admin123@cluster0.kogrf.mongodb.net/project5?retryWrites=true&w=majority&appName=Cluster0';
 
